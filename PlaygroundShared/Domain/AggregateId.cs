@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 using PlaygroundShared.DomainEvents;
 
 namespace PlaygroundShared.Domain
@@ -6,7 +7,7 @@ namespace PlaygroundShared.Domain
     public struct AggregateId : IEquatable<AggregateId>
     {
         public Guid Id { get; }
-
+        
         public AggregateId(Guid id)
         {
             if (id == Guid.Empty)
@@ -17,6 +18,7 @@ namespace PlaygroundShared.Domain
             Id = id;
         }
 
+        [JsonConstructor]
         public AggregateId(string id)
         {
             if (!Guid.TryParse(id, out var parsedId))

@@ -28,14 +28,6 @@ namespace PlaygroundShared.DomainEvents
             _domainEvents.Add(domainEvent);
         }
 
-        public async Task ExecuteAsync()
-        {
-            var tasksList = _domainEvents.Select(domainEvent => _messagePublisher.Publish(domainEvent)).ToList();
-
-            await Task.WhenAll(tasksList);
-            Clear();
-        }
-
         public void Clear()
         {
             _domainEvents.Clear();

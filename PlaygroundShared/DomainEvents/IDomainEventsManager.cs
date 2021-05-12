@@ -7,7 +7,6 @@ namespace PlaygroundShared.DomainEvents
     {
         IEnumerable<IDomainEvent> DomainEvents { get; }
         void Publish(IDomainEvent domainEvent);
-        Task ExecuteAsync();
         void Clear();
     }
 }

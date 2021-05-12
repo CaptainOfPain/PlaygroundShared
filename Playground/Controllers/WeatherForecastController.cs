@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PlaygroundShared.Domain;
 using PlaygroundShared.DomainEvents;
 
 namespace Playground.Controllers
@@ -34,7 +35,8 @@ namespace Playground.Controllers
                 {
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = rng.Next(-20, 55),
-                    Summary = Summaries[rng.Next(Summaries.Length)]
+                    Summary = Summaries[rng.Next(Summaries.Length)],
+                    Id = AggregateId.Generate()
                 })
                 .ToArray();
 

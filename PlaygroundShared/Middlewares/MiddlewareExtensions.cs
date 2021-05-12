@@ -4,9 +4,10 @@ namespace PlaygroundShared.Middlewares
 {
     public static class MiddlewareExtensions
     {
-        public static IApplicationBuilder UseEventsPublisherMiddleware(this IApplicationBuilder builder)
-        {
-            return builder.UseMiddleware<EventsPublisherMiddleware>();
-        }
+        public static IApplicationBuilder UseEventsPublisherMiddleware(this IApplicationBuilder builder) 
+            => builder.UseMiddleware<EventsPublisherMiddleware>();
+
+        public static IApplicationBuilder UseCorrelationContextMiddleware(this IApplicationBuilder builder) 
+            => builder.UseMiddleware<CorrelationContextMiddleware>();
     }
 }

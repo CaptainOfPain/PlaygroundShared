@@ -1,20 +1,32 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using PlaygroundShared.Domain;
+using PlaygroundShared.DomainEvents;
+using PlaygroundShared.Infrastructure.Events;
 using PlaygroundShared.Infrastructure.Persistance;
 
 namespace PlaygroundShared.Infrastructure.Repositories
 {
-    public abstract class BaseAggregateRootRepository<TAggregate, TEntity> : IAggregateRepository<TAggregate> where TAggregate : BaseAggregateRoot where TEntity : BaseDbEntity
+    public abstract class BaseAggregateRootRepository<TAggregate, TEntity, TEventEntity> : IAggregateRepository<TAggregate> where TAggregate : BaseAggregateRoot where TEntity : BaseDbEntity where TEventEntity : BaseEventEntity
     {
         private readonly IGenericRepository<TEntity> _repository;
+        private readonly IGenericEventRepository<TEventEntity> _eventRepository;
+        private readonly IDomainEventsManager _domainEventsManager;
         private readonly IMapper _mapper;
         private readonly IAggregateRecreate<TAggregate> _aggregateRecreate;
 
-        protected BaseAggregateRootRepository(IGenericRepository<TEntity> repository, IMapper mapper, IAggregateRecreate<TAggregate> aggregateRecreate)
+        protected BaseAggregateRootRepository(
+            IGenericRepository<TEntity> repository,
+            IGenericEventRepository<TEventEntity> eventRepository,
+            IDomainEventsManager domainEventsManager,
+            IMapper mapper,
+            IAggregateRecreate<TAggregate> aggregateRecreate)
         {
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _eventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository));
+            _domainEventsManager = domainEventsManager ?? throw new ArgumentNullException(nameof(domainEventsManager));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
             _aggregateRecreate = aggregateRecreate ?? throw new ArgumentNullException(nameof(aggregateRecreate));
         }
@@ -29,6 +41,16 @@ namespace PlaygroundShared.Infrastructure.Repositories
             else
             {
                 await _repository.AddAsync(mappedEntity);
+            }
+
+            await SaveEventsAsync(aggregate);
+        }
+
+        private async Task SaveEventsAsync(TAggregate aggregate)
+        {
+            foreach (var domainEvent in _domainEventsManager.DomainEvents.Where(x => x.Id == aggregate.Id))
+            {
+                await _eventRepository.AddAsync(_mapper.Map<TEventEntity>(domainEvent));
             }
         }
 

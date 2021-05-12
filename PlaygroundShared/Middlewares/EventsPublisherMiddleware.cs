@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using PlaygroundShared.Application.Services;
 using PlaygroundShared.DomainEvents;
 
 namespace PlaygroundShared.Middlewares
@@ -14,16 +15,16 @@ namespace PlaygroundShared.Middlewares
             _next = next ?? throw new ArgumentNullException(nameof(next));
         }
 
-        public async Task InvokeAsync(HttpContext context, IDomainEventsManager domainEventManager)
+        public async Task InvokeAsync(HttpContext context, IEventsService eventsService)
         {
             try
             {
                 await _next(context);
-                await domainEventManager.ExecuteAsync();
+                await eventsService.ExecuteEventsAsync();
             }
             catch(Exception)
             {
-                domainEventManager.Clear();
+                eventsService.Clear();
                 throw;
             }
         }
