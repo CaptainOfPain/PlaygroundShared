@@ -19,7 +19,7 @@ namespace PlaygroundShared.Middlewares
         public async Task InvokeAsync(HttpContext context, ICorrelationContext correlationContext)
         {
             correlationContext.GenerateCorrelationId();
-            var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = context.User.FindFirst("id")?.Value;
             if (userId != null)
             {
                 var currentUser = new CurrentUser(new AggregateId(userId), context.User.FindFirst(ClaimTypes.Name).Value);

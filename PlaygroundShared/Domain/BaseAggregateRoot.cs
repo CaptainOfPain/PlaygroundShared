@@ -18,6 +18,11 @@ namespace PlaygroundShared.Domain
             ModifiedDate = CreatedDate;
         }
 
+        protected BaseAggregateRoot()
+        {
+
+        }
+
         protected void DomainEvent(IDomainEvent @event)
         {
             _domainEventsManager.Publish(@event);

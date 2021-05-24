@@ -1,7 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+		    <PackageId>PlaygroundShared</PackageId>
+		    <Version>1.0.7</Version>
+		    <Authors>Jakub Swiech</Authors>
     </PropertyGroup>
 
     <ItemGroup>

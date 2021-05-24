@@ -40,7 +40,7 @@ namespace PlaygroundShared.IoC
                 optionsBuilder.UseSqlServer(sqlConnectionConfiguration.EventConnectionString);
 
                 return (TDbContext) Activator.CreateInstance(typeof(TDbContext), optionsBuilder.Options);
-            }).As<DbContext>().InstancePerLifetimeScope();
+            }).As<EventDbContext>().InstancePerLifetimeScope();
 
             return builder;
         }

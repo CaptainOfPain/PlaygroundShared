@@ -11,11 +11,11 @@ namespace PlaygroundShared.Infrastructure.Repositories
 {
     public abstract class BaseAggregateRootRepository<TAggregate, TEntity, TEventEntity> : IAggregateRepository<TAggregate> where TAggregate : BaseAggregateRoot where TEntity : BaseDbEntity where TEventEntity : BaseEventEntity
     {
-        private readonly IGenericRepository<TEntity> _repository;
-        private readonly IGenericEventRepository<TEventEntity> _eventRepository;
-        private readonly IDomainEventsManager _domainEventsManager;
-        private readonly IMapper _mapper;
-        private readonly IAggregateRecreate<TAggregate> _aggregateRecreate;
+        protected readonly IGenericRepository<TEntity> Repository;
+        protected readonly IGenericEventRepository<TEventEntity> EventRepository;
+        protected readonly IDomainEventsManager DomainEventsManager;
+        protected readonly IMapper Mapper;
+        protected readonly IAggregateRecreate<TAggregate> AggregateRecreate;
 
         protected BaseAggregateRootRepository(
             IGenericRepository<TEntity> repository,
@@ -24,23 +24,23 @@ namespace PlaygroundShared.Infrastructure.Repositories
             IMapper mapper,
             IAggregateRecreate<TAggregate> aggregateRecreate)
         {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _eventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository));
-            _domainEventsManager = domainEventsManager ?? throw new ArgumentNullException(nameof(domainEventsManager));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _aggregateRecreate = aggregateRecreate ?? throw new ArgumentNullException(nameof(aggregateRecreate));
+            Repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            EventRepository = eventRepository ?? throw new ArgumentNullException(nameof(eventRepository));
+            DomainEventsManager = domainEventsManager ?? throw new ArgumentNullException(nameof(domainEventsManager));
+            Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            AggregateRecreate = aggregateRecreate ?? throw new ArgumentNullException(nameof(aggregateRecreate));
         }
         
         public virtual async Task PersistAsync(TAggregate aggregate)
         {
             var mappedEntity = MapToEntity(aggregate);
-            if (await _repository.ExistsAsync(x => x.Id == aggregate.Id.ToGuid()))
+            if (await Repository.ExistsAsync(x => x.Id == aggregate.Id.ToGuid()))
             {
-                await _repository.UpdateAsync(mappedEntity);
+                await Repository.UpdateAsync(mappedEntity);
             }
             else
             {
-                await _repository.AddAsync(mappedEntity);
+                await Repository.AddAsync(mappedEntity);
             }
 
             await SaveEventsAsync(aggregate);
@@ -48,26 +48,30 @@ namespace PlaygroundShared.Infrastructure.Repositories
 
         private async Task SaveEventsAsync(TAggregate aggregate)
         {
-            foreach (var domainEvent in _domainEventsManager.DomainEvents.Where(x => x.Id == aggregate.Id))
+            foreach (var domainEvent in DomainEventsManager.DomainEvents.Where(x => x.Id == aggregate.Id))
             {
-                await _eventRepository.AddAsync(_mapper.Map<TEventEntity>(domainEvent));
+                await EventRepository.AddAsync(Mapper.Map<TEventEntity>(domainEvent));
             }
         }
 
         public virtual async Task DeleteAsync(TAggregate aggregate)
         {
             var mappedEntity = MapToEntity(aggregate);
-            await _repository.DeleteAsync(mappedEntity);
+            await Repository.DeleteAsync(mappedEntity);
         }
 
-        public virtual async Task<TAggregate> GetAsync(AggregateId id) => MapToAggregate(await _repository.GetAsync(id.ToGuid()));
+        public virtual async Task<TAggregate> GetAsync(AggregateId id) => MapToAggregate(await Repository.GetAsync(id.ToGuid()));
 
-        protected virtual TEntity MapToEntity(TAggregate aggregate) => _mapper.Map<TEntity>(aggregate);
+        protected virtual TEntity MapToEntity(TAggregate aggregate) => Mapper.Map<TEntity>(aggregate);
 
         protected virtual TAggregate MapToAggregate(TEntity entity)
         {
-            var aggregate = _mapper.Map<TAggregate>(entity);
-            _aggregateRecreate.Init(aggregate);
+            var aggregate = Mapper.Map<TAggregate>(entity);
+
+            if (aggregate != null)
+            {
+                AggregateRecreate.Init(aggregate);
+            }
 
             return aggregate;
         } 
