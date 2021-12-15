@@ -1,7 +1,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using PlaygroundShared.Domain;
-using PlaygroundShared.DomainEvents;
+using PlaygroundShared.Domain.Domain;
+using PlaygroundShared.Domain.DomainEvents;
 
 namespace Playground
 {

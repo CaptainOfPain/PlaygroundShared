@@ -5,6 +5,7 @@
 		    <PackageId>PlaygroundShared</PackageId>
 		    <Version>1.0.7</Version>
 		    <Authors>Jakub Swiech</Authors>
+		    <LangVersion>10</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>

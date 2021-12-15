@@ -9,12 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using PlaygroundShared.Api.Middlewares;
 using PlaygroundShared.Configurations;
-using PlaygroundShared.Domain;
-using PlaygroundShared.DomainEvents;
-using PlaygroundShared.IoC;
-using PlaygroundShared.Messages;
-using PlaygroundShared.Middlewares;
+using PlaygroundShared.Domain.Domain;
+using PlaygroundShared.Domain.DomainEvents;
+using PlaygroundShared.Infrastructure.EF.IoC;
 
 namespace Playground
 {
