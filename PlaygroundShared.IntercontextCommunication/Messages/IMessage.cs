@@ -2,5 +2,5 @@
 
 public interface IMessage
 {
-        
+        public Guid CorrelationId { get; }
 }

@@ -15,6 +15,7 @@ namespace Playground
 
         public string Summary { get; set; }
         public AggregateId Id { get; set; }
+        public Guid CorrelationId { get; set; }
     }
 
     public class TestDbContext : DbContext

@@ -7,7 +7,7 @@
 
     <ItemGroup>
         <PackageReference Include="Autofac" Version="6.3.0" />
-        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+        <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.5" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
@@ -16,7 +16,15 @@
       <ProjectReference Include="..\PlaygroundShared.Api\PlaygroundShared.Api.csproj" />
       <ProjectReference Include="..\PlaygroundShared.Domain\PlaygroundShared.Domain.csproj" />
       <ProjectReference Include="..\PlaygroundShared.Infrastructure.EF\PlaygroundShared.Infrastructure.EF.csproj" />
+      <ProjectReference Include="..\PlaygroundShared.IntercontextCommunication.RabbitMq\PlaygroundShared.IntercontextCommunication.RabbitMq.csproj" />
       <ProjectReference Include="..\PlaygroundShared\PlaygroundShared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="rawrabbit.json" />
+      <Resource Include="rawrabbit.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Resource>
     </ItemGroup>
 
 </Project>

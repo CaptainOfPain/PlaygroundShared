@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaygroundShared.Interconte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaygroundShared.IntercontextCommunication.RabbitMq", "PlaygroundShared.IntercontextCommunication.RabbitMq\PlaygroundShared.IntercontextCommunication.RabbitMq.csproj", "{B256416F-3F2B-4029-A71C-6E509ED3531C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlaygroundShared.Infrastructure.MongoDb", "PlaygroundShared.Infrastructure.MongoDb\PlaygroundShared.Infrastructure.MongoDb.csproj", "{CDC9FE93-2EE9-48E7-A018-E41A36CB5764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{B256416F-3F2B-4029-A71C-6E509ED3531C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B256416F-3F2B-4029-A71C-6E509ED3531C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B256416F-3F2B-4029-A71C-6E509ED3531C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC9FE93-2EE9-48E7-A018-E41A36CB5764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC9FE93-2EE9-48E7-A018-E41A36CB5764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC9FE93-2EE9-48E7-A018-E41A36CB5764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC9FE93-2EE9-48E7-A018-E41A36CB5764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
