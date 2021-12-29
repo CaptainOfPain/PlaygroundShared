@@ -1,7 +1,5 @@
 using System.Reflection;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using MongoDB.Driver;
-using PlaygroundShared.Infrastructure.Core.Events;
 using PlaygroundShared.Infrastructure.Core.Repositories;
 using PlaygroundShared.Infrastructure.MongoDb.Attribute;
 using PlaygroundShared.Infrastructure.MongoDb.Entities;

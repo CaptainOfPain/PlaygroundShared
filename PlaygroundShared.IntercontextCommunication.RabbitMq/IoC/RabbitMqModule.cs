@@ -2,6 +2,7 @@ using Autofac;
 using Newtonsoft.Json;
 using PlaygroundShared.Configurations;
 using PlaygroundShared.IntercontextCommunication.Messages;
+using PlaygroundShared.IntercontextCommunication.RabbitMq.Filters;
 using PlaygroundShared.IntercontextCommunication.RabbitMq.Messages;
 using PlaygroundShared.Messages;
 using RabbitMQ.Client;
@@ -35,5 +36,7 @@ public class RabbitMqModule : Autofac.Module
         builder.Register(ctx => connection.CreateModel()).SingleInstance();
         builder.RegisterType<BusPublisher>().As<IBusPublisher>().InstancePerLifetimeScope();
         builder.RegisterType<BusSubscriber>().As<IBusSubscriber>().InstancePerLifetimeScope();
+        builder.RegisterGeneric(typeof(MessageHandlerFilter<>)).InstancePerDependency();
+        builder.RegisterGeneric(typeof(ExceptionPublisherFilter<>)).InstancePerDependency();
     }
 }

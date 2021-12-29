@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\PlaygroundShared.Configurations\PlaygroundShared.Configurations.csproj" />
+      <ProjectReference Include="..\PlaygroundShared.Infrastructure.Core\PlaygroundShared.Infrastructure.Core.csproj" />
       <ProjectReference Include="..\PlaygroundShared.IntercontextCommunication\PlaygroundShared.IntercontextCommunication.csproj" />
     </ItemGroup>
 

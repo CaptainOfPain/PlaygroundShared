@@ -127,7 +127,7 @@ namespace Playground
         public Task HandleMessageAsync(WeatherForecast message, CancellationToken cancellationToken)
         {
             Console.WriteLine(JsonConvert.SerializeObject(message));
-            throw new Exception();
+            // throw new Exception();
             return Task.CompletedTask;
         }
     }
