@@ -5,6 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
+        <Title>PlaygroundShared.Infrastructure.EF</Title>
+        <Authors>Jakub Święch</Authors>
     </PropertyGroup>
 
     <ItemGroup>

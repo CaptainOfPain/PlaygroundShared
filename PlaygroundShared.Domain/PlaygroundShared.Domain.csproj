@@ -5,6 +5,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
+        <Title>PlaygroundShared.Domain</Title>
+        <Authors>Jakub Święch</Authors>
     </PropertyGroup>
 
     <ItemGroup>

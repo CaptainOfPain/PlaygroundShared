@@ -5,6 +5,9 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>10</LangVersion>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>PlaygroundShared.Api</Title>
+        <Authors>Jaub Święch</Authors>
     </PropertyGroup>
 
     <ItemGroup>
