@@ -7,10 +7,7 @@
         <LangVersion>10</LangVersion>
         <Title>PlaygroundShared.IntercontextCommunication</Title>
         <Authors>Jakub Święch</Authors>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\PlaygroundShared\PlaygroundShared.csproj" />
-    </ItemGroup>
 
 </Project>

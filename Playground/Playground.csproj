@@ -17,7 +17,6 @@
       <ProjectReference Include="..\PlaygroundShared.Domain\PlaygroundShared.Domain.csproj" />
       <ProjectReference Include="..\PlaygroundShared.Infrastructure.EF\PlaygroundShared.Infrastructure.EF.csproj" />
       <ProjectReference Include="..\PlaygroundShared.IntercontextCommunication.RabbitMq\PlaygroundShared.IntercontextCommunication.RabbitMq.csproj" />
-      <ProjectReference Include="..\PlaygroundShared\PlaygroundShared.csproj" />
     </ItemGroup>
 
     <ItemGroup>

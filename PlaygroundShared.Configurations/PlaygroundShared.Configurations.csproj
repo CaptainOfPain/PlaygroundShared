@@ -7,6 +7,7 @@
         <LangVersion>10</LangVersion>
         <Title>PlaygroundShared.Configurations</Title>
         <Authors>Jakub Święch</Authors>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
 </Project>

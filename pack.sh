@@ -9,3 +9,14 @@ dotnet pack ./PlaygroundShared.Infrastructure.EF/PlaygroundShared.Infrastructure
 dotnet pack ./PlaygroundShared.Infrastructure.MongoDb/PlaygroundShared.Infrastructure.MongoDb.csproj -o ./packages/
 dotnet pack ./PlaygroundShared.IntercontextCommunication/PlaygroundShared.IntercontextCommunication.csproj -o ./packages/
 dotnet pack ./PlaygroundShared.IntercontextCommunication.RabbitMq/PlaygroundShared.IntercontextCommunication.RabbitMq.csproj -o ./packages/
+
+dotnet nuget push ./packages/PlaygroundShared.Api.$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.Application.$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.Configurations.$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.Domain.csproj.$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.Infrastructure.Core$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.Infrastructure.EF.$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.Infrastructure.MongoDb.$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.IntercontextCommunication.$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+dotnet nuget push ./packages/PlaygroundShared.IntercontextCommunication.RabbitMq..$1.nupkg --api-key $2 --source https://api.nuget.org/v3/index.json
+

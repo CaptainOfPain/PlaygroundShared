@@ -7,6 +7,7 @@
         <LangVersion>10</LangVersion>
         <Title>PlaygroundShared.IntercontextCommunication.RabbitMq</Title>
         <Authors>Jakub Święch</Authors>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,6 +18,9 @@
 
     <ItemGroup>
       <PackageReference Include="Autofac" Version="6.3.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+      <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
     </ItemGroup>
 
 </Project>

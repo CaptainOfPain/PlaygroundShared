@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using PlaygroundShared.Configurations;
 using PlaygroundShared.IntercontextCommunication.Messages;
-using PlaygroundShared.Messages;
 using RabbitMQ.Client;
 
 namespace PlaygroundShared.IntercontextCommunication.RabbitMq;

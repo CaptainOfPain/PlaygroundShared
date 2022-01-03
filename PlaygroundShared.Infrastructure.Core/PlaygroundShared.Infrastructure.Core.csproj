@@ -7,10 +7,16 @@
         <LangVersion>10</LangVersion>
         <Title>PlaygroundShared.Infrastructure.Core</Title>
         <Authors>Jakub Święch</Authors>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\PlaygroundShared.Domain\PlaygroundShared.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac" Version="6.3.0" />
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
     </ItemGroup>
 
 </Project>
