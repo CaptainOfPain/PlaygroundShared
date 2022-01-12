@@ -1,6 +1,6 @@
 ﻿namespace PlaygroundShared.Domain.Domain;
 
-public interface IAggregateRepository<TAggregate> where TAggregate : BaseAggregateRoot
+public interface IAggregateRepository<TAggregate> : IRepository where TAggregate : BaseAggregateRoot
 {
     Task PersistAsync(TAggregate aggregate);
     Task DeleteAsync(TAggregate aggregate);

@@ -7,10 +7,11 @@
         <LangVersion>10</LangVersion>
         <Title>PlaygroundShared.Domain</Title>
         <Authors>Jakub Święch</Authors>
-        <PackageVersion>1.0.1</PackageVersion>
+        <PackageVersion>1.0.3</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="Autofac" Version="6.3.0" />
       <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 

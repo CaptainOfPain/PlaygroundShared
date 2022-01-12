@@ -36,6 +36,7 @@ public class RabbitMqModule : Autofac.Module
         builder.Register(ctx => connection.CreateModel()).SingleInstance();
         builder.RegisterType<BusPublisher>().As<IBusPublisher>().InstancePerLifetimeScope();
         builder.RegisterType<BusSubscriber>().As<IBusSubscriber>().InstancePerLifetimeScope();
+        builder.RegisterType<RabbitMqMessagePublisher>().As<IMessagePublisher>().InstancePerLifetimeScope();
         builder.RegisterGeneric(typeof(MessageHandlerFilter<>)).InstancePerDependency();
         builder.RegisterGeneric(typeof(ExceptionPublisherFilter<>)).InstancePerDependency();
     }
