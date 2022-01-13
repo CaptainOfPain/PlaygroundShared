@@ -8,5 +8,5 @@ public class BaseMongoEventEntity : BaseEventEntity
 {
     [BsonId]
     [BsonRepresentation(BsonType.String)]
-    public new Guid Id { get; set; }
+    public override Guid Id { get; set; }
 }

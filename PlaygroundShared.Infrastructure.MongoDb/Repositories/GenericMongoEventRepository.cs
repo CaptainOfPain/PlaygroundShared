@@ -1,5 +1,6 @@
 using System.Reflection;
 using MongoDB.Driver;
+using PlaygroundShared.Configurations;
 using PlaygroundShared.Infrastructure.Core.Repositories;
 using PlaygroundShared.Infrastructure.MongoDb.Attribute;
 using PlaygroundShared.Infrastructure.MongoDb.Entities;
@@ -8,12 +9,12 @@ namespace PlaygroundShared.Infrastructure.MongoDb.Repositories;
 
 public class GenericMongoEventRepository<TEventEntity> : IGenericEventRepository<TEventEntity> where TEventEntity : BaseMongoEventEntity
 {
-    private readonly IEventMongoDatabase _eventMongoDatabase;
+    private readonly IMongoDatabase _eventMongoDatabase;
     protected virtual IMongoCollection<TEventEntity> Collection => _eventMongoDatabase.GetCollection<TEventEntity>(typeof(TEventEntity).GetCustomAttribute<MongoCollectionAttribute>().CollectionName);
 
-    public GenericMongoEventRepository(IEventMongoDatabase eventMongoDatabase)
+    public GenericMongoEventRepository(IMongoClient mongoClient, IMongoDbConfiguration mongoDbConfiguration)
     {
-        _eventMongoDatabase = eventMongoDatabase ?? throw new ArgumentNullException(nameof(eventMongoDatabase));
+        _eventMongoDatabase = mongoClient.GetDatabase(mongoDbConfiguration.EventDatabaseName) ?? throw new ArgumentNullException(nameof(IMongoDatabase));
     }
     public async Task AddAsync(TEventEntity eventEntity)
     {

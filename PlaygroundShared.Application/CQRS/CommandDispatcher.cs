@@ -1,17 +1,20 @@
 ﻿using Autofac;
+using PlaygroundShared.Application.Services;
 
 namespace PlaygroundShared.Application.CQRS;
 
 public class CommandDispatcher : ICommandDispatcher
 {
     private readonly IComponentContext _context;
+    private readonly IEventsService _eventsService;
 
-    public CommandDispatcher(IComponentContext context)
+    public CommandDispatcher(IComponentContext context, IEventsService eventsService)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
+        _eventsService = eventsService ?? throw new ArgumentNullException(nameof(eventsService));
     }
         
-    public Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand
+    public async Task DispatchAsync<TCommand>(TCommand command) where TCommand : ICommand
     {
         if (command == null)
         {
@@ -24,6 +27,8 @@ public class CommandDispatcher : ICommandDispatcher
             throw new ArgumentNullException(nameof(handler));
         }
 
-        return handler.HandleAsync(command);
+        await handler.HandleAsync(command);
+
+        await _eventsService.ExecuteEventsAsync();
     }
 }

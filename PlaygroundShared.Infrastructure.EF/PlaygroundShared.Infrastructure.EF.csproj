@@ -7,7 +7,7 @@
         <LangVersion>10</LangVersion>
         <Title>PlaygroundShared.Infrastructure.EF</Title>
         <Authors>Jakub Święch</Authors>
-        <PackageVersion>1.0.3</PackageVersion>
+        <PackageVersion>1.0.6</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>

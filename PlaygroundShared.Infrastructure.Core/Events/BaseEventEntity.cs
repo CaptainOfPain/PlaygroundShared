@@ -2,7 +2,7 @@
 
 public abstract class BaseEventEntity
 {
-    public Guid Id { get; set; }
+    public virtual Guid Id { get; set; }
     public Guid AggregateId { get; set; }
     public string EventType { get; set; }
     public DateTime CreatedAt { get; set; }

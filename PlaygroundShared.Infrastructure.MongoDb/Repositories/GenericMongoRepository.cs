@@ -1,6 +1,7 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using MongoDB.Driver;
+using PlaygroundShared.Configurations;
 using PlaygroundShared.Infrastructure.Core.Persistance;
 using PlaygroundShared.Infrastructure.Core.Repositories;
 using PlaygroundShared.Infrastructure.MongoDb.Attribute;
@@ -10,15 +11,15 @@ namespace PlaygroundShared.Infrastructure.MongoDb.Repositories;
 
 public class GenericMongoRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseMongoEntity
 {
-    private readonly IMainMongoDatabase _mongoDatabase;
+    private readonly IMongoDatabase _mongoDatabase;
 
     protected IMongoCollection<TEntity> Collection =>
         _mongoDatabase.GetCollection<TEntity>(typeof(TEntity).GetCustomAttribute<MongoCollectionAttribute>()
             .CollectionName);
 
-    public GenericMongoRepository(IMainMongoDatabase mongoDatabase)
+    public GenericMongoRepository(IMongoClient mongoClient, IMongoDbConfiguration mongoDbConfiguration)
     {
-        _mongoDatabase = mongoDatabase ?? throw new ArgumentNullException(nameof(mongoDatabase));
+        _mongoDatabase = mongoClient.GetDatabase(mongoDbConfiguration.MainDatabaseName) ?? throw new ArgumentNullException(nameof(IMongoDatabase));
     }
     
     public async Task AddAsync(TEntity entity)

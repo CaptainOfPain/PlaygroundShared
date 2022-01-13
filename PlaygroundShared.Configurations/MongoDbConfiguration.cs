@@ -1,6 +1,6 @@
 namespace PlaygroundShared.Configurations;
 
-public class MongoDbConfiguration
+public class MongoDbConfiguration : IMongoDbConfiguration
 {
     public string ConnectionString { get; set; }
     public string MainDatabaseName { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace PlaygroundShared.Infrastructure.Core.Persistance;
 
-public class BaseDbEntity
+public abstract class BaseDbEntity
 {
-    public Guid Id { get; set; }
+    public abstract Guid Id { get; set; }
 }
