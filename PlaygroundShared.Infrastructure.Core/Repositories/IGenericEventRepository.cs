@@ -2,7 +2,7 @@
 
 namespace PlaygroundShared.Infrastructure.Core.Repositories;
 
-public interface IGenericEventRepository<TEventEntity> where TEventEntity : BaseEventEntity
+public interface IGenericEventRepository<TEventEntity> where TEventEntity : IEventEntity
 {
     Task AddAsync(TEventEntity eventEntity);
     Task DeleteAsync(TEventEntity eventEntity);

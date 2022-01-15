@@ -3,7 +3,7 @@ using PlaygroundShared.Infrastructure.Core.Persistance;
 
 namespace PlaygroundShared.Infrastructure.Core.Repositories;
 
-public interface IGenericRepository<TEntity> where TEntity : BaseDbEntity
+public interface IGenericRepository<TEntity> where TEntity : IDbEntity
 {
     Task AddAsync(TEntity entity);
     Task UpdateAsync(TEntity entity);

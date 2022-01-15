@@ -5,7 +5,7 @@ using PlaygroundShared.Infrastructure.EF.Contexts;
 
 namespace PlaygroundShared.Infrastructure.EF.Repositories;
 
-public class GenericEfEventRepository<TEventEntity> : IGenericEventRepository<TEventEntity> where TEventEntity : BaseEventEntity
+public class GenericEfEventRepository<TEventEntity> : IGenericEventRepository<TEventEntity> where TEventEntity : BaseEfEventEntity
 {
     private readonly DbContext _dbContext;
     private DbSet<TEventEntity> Set { get; }

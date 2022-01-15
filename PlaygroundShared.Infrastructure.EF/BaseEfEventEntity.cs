@@ -1,8 +1,10 @@
-﻿namespace PlaygroundShared.Infrastructure.Core.Events;
+using PlaygroundShared.Infrastructure.Core.Events;
 
-public abstract class BaseEventEntity
+namespace PlaygroundShared.Infrastructure.EF;
+
+public class BaseEfEventEntity : IEventEntity
 {
-    public virtual Guid Id { get; set; }
+    public Guid Id { get; set; }
     public Guid AggregateId { get; set; }
     public string EventType { get; set; }
     public DateTime CreatedAt { get; set; }

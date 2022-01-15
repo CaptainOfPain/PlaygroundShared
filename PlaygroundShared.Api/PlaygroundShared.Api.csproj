@@ -8,7 +8,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Title>PlaygroundShared.Api</Title>
         <Authors>Jaub Święch</Authors>
-        <PackageVersion>1.0.6</PackageVersion>
+        <PackageVersion>1.0.9</PackageVersion>
     </PropertyGroup>
 
     <ItemGroup>

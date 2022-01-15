@@ -4,9 +4,9 @@ using PlaygroundShared.Infrastructure.Core.Persistance;
 
 namespace PlaygroundShared.Infrastructure.MongoDb.Entities;
 
-public class BaseMongoEntity : BaseDbEntity
+public class BaseMongoEntity : IDbEntity
 {
     [BsonId]
     [BsonRepresentation(BsonType.String)]
-    public override Guid Id { get; set; }
+    public Guid Id { get; set; }
 }

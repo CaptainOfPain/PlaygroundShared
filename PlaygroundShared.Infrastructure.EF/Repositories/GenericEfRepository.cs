@@ -5,7 +5,7 @@ using PlaygroundShared.Infrastructure.Core.Repositories;
 
 namespace PlaygroundShared.Infrastructure.EF.Repositories;
 
-public abstract class GenericEfRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseDbEntity
+public abstract class GenericEfRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEfEntity
 {
     private readonly DbContext _context;
     protected DbSet<TEntity> Set => _context.Set<TEntity>();

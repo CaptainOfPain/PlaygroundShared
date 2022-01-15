@@ -16,14 +16,30 @@ public class BusPublisher : IBusPublisher
         _rabbitMqConfiguration = rabbitMqConfiguration ?? throw new ArgumentNullException(nameof(rabbitMqConfiguration));
     }
         
-    public async Task PublishAsync<TMessage>(TMessage message) where TMessage : IMessage
+    public Task PublishAsync<TMessage>(TMessage message) where TMessage : IMessage
     {
         var messageType = typeof(TMessage);
         var genericType = messageType.GetGenericArguments().FirstOrDefault();
         var path = 
             genericType != null ? $"{genericType?.Name}_Failed" 
                 : $"{messageType.Name}";
-        
+
+        return PublishAsync(path, message);
+    }
+
+    public Task PublishAsync(IMessage message)
+    {
+        var messageType = message.GetType();
+        var genericType = messageType.GetGenericArguments().FirstOrDefault();
+        var path = 
+            genericType != null ? $"{genericType?.Name}_Failed" 
+                : $"{messageType.Name}";
+
+        return PublishAsync(path, message);
+    }
+
+    private async Task PublishAsync(string path, IMessage message)
+    {
         _model.ExchangeDeclare(
             path,
             _rabbitMqConfiguration.Exchange.Type.ToLowerInvariant(),
