@@ -6,7 +6,11 @@ using PlaygroundShared.Infrastructure.Core.Persistance;
 
 namespace PlaygroundShared.Infrastructure.Core.Repositories;
 
-public abstract class BaseAggregateRootRepository<TAggregate, TEntity, TEventEntity> : IAggregateRepository<TAggregate> where TAggregate : BaseAggregateRoot where TEntity : IDbEntity where TEventEntity : IEventEntity
+public abstract class BaseAggregateRootRepository<TAggregate, TEntity, TEventEntity> :
+    IAggregateRepository<TAggregate>
+    where TAggregate : BaseAggregateRoot 
+    where TEntity : IDbEntity 
+    where TEventEntity : IEventEntity
 {
     protected readonly IGenericRepository<TEntity> Repository;
     protected readonly IGenericEventRepository<TEventEntity> EventRepository;

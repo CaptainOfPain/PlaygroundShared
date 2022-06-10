@@ -1,6 +1,5 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using PlaygroundShared.Infrastructure.Core.Persistance;
 using PlaygroundShared.Infrastructure.Core.Repositories;
 
 namespace PlaygroundShared.Infrastructure.EF.Repositories;

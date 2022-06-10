@@ -1,14 +1,15 @@
 using Autofac;
+using PlaygroundShared.IntercontextCommunication;
 
 namespace PlaygroundShared.Infrastructure.Core.Pipelines;
 
 public class PipelineBuilder<T>
 {
-    private readonly IComponentContext _componentContext;
+    private readonly ISubscriberServiceLocator _subscriberServiceLocator;
 
-    public PipelineBuilder(IComponentContext componentContext)
+    public PipelineBuilder(ISubscriberServiceLocator subscriberServiceLocator)
     {
-        _componentContext = componentContext ?? throw new ArgumentNullException(nameof(componentContext));
+        _subscriberServiceLocator = subscriberServiceLocator;
     }
     
     private List<Func<IFilter<T>>> filters = new List<Func<IFilter<T>>>();
@@ -27,7 +28,7 @@ public class PipelineBuilder<T>
 
     public PipelineBuilder<T> Register<TFilter>() where TFilter : IFilter<T>
     {
-        var filter = _componentContext.Resolve<TFilter>();
+        var filter = _subscriberServiceLocator.GetService<TFilter>();
         filters.Add(() => filter);
         return this;
     }

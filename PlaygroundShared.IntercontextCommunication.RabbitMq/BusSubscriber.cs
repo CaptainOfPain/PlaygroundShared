@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using Newtonsoft.Json;
 using PlaygroundShared.Configurations;
 using PlaygroundShared.Infrastructure.Core.Pipelines;
 using PlaygroundShared.IntercontextCommunication.Messages;
@@ -11,22 +10,19 @@ namespace PlaygroundShared.IntercontextCommunication.RabbitMq;
 
 public class BusSubscriber : IBusSubscriber
 {
-    private readonly IComponentContext _componentContext;
+    private readonly ISubscriberServiceLocator _subscriberServiceLocator;
     private readonly IModel _model;
-    private readonly IBusPublisher _busPublisher;
     private readonly RabbitMqConfiguration _rabbitMqConfiguration;
 
     private List<IFilter<BasicDeliverEventArgs>> _filters = new();
 
     public BusSubscriber(
-        IComponentContext componentContext,
+        ISubscriberServiceLocator subscriberServiceLocator,
         IModel model,
-        IBusPublisher busPublisher, 
         RabbitMqConfiguration rabbitMqConfiguration)
     {
-        _componentContext = componentContext ?? throw new ArgumentNullException(nameof(componentContext));
+        _subscriberServiceLocator = subscriberServiceLocator ?? throw new ArgumentNullException(nameof(subscriberServiceLocator));
         _model = model ?? throw new ArgumentNullException(nameof(model));
-        _busPublisher = busPublisher ?? throw new ArgumentNullException(nameof(busPublisher));
         _rabbitMqConfiguration = rabbitMqConfiguration ?? throw new ArgumentNullException(nameof(rabbitMqConfiguration));
     }
 
@@ -56,7 +52,7 @@ public class BusSubscriber : IBusSubscriber
 
     private IFilter<BasicDeliverEventArgs> PreparePipeline<TMessage>() where TMessage : IMessage
     {
-        var pipelineBuilder = new PipelineBuilder<BasicDeliverEventArgs>(_componentContext);
+        var pipelineBuilder = new PipelineBuilder<BasicDeliverEventArgs>(_subscriberServiceLocator);
         pipelineBuilder
             .Register<MessageHandlerFilter<TMessage>>()
             .Register<ExceptionPublisherFilter<TMessage>>();
